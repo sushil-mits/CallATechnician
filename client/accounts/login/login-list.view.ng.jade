@@ -1,0 +1,27 @@
+.login-list(layout='row')
+  span(flex='')
+  div(layout='column')
+    h1 Login
+    form.md-whiteframe-z1(ng-submit='save()', name='form', novalidate='', layout-padding='')
+      p Add a login
+      md-input-container
+        label Name
+        input(ng-model='newLogin.name', placeholder='Name')
+      input.md-button(type='submit', value='Add')
+    div(layout='row', layout-padding='')
+      md-input-container(flex='65')
+        label Search
+        input(type='search', ng-model='search', placeholder='Search')
+      md-select(ng-model='orderProperty', flex='35')
+        md-option(value='1') Ascending
+        md-option(value='-1') Descending
+
+    ul
+      li(dir-paginate='login in login | itemsPerPage: perPage', total-items='loginCount.count',  current-page='page')
+        p 
+          a(href='/login/{{login._id}}') {{ login.name }}
+          button(ng-click='remove(login)') &times;
+    dir-pagination-controls.md-accent(on-page-change='pageChanged(newPageNumber)')
+
+    p Total number of login: {{loginCount.count}}
+  span(flex='')
